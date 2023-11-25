@@ -1,12 +1,14 @@
-import { Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box, Button, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from 'services';
 import { ICliente } from 'types/ICliente';
 
 export default function ListagemCliente() {
 
     const [clientes, setClientes] = useState <ICliente[]> ([]);
+    const [nome, setNome] = useState('');
 
     useEffect(() => {
         api.get<ICliente[]>('clientes')
@@ -16,8 +18,42 @@ export default function ListagemCliente() {
             );
     }, []);
 
+    /* useEffect(() => {
+
+        if (nome.length > 0) {
+            api.get<ICliente[]>(`clientes/nome/${nome}`)
+                .then((resposta) => {
+                    setClientes(resposta.data);
+                });
+        }
+        
+    }, [nome]); */
+
+    const handleClientes = ((evento : React.ChangeEvent<HTMLInputElement>) => {
+        evento.preventDefault;        
+        
+        const clientesFiltrados = clientes.filter((cliente) => {
+            cliente.nome === nome;
+        }) ;
+
+        setClientes(clientesFiltrados);
+        
+    }); 
+
     return (
-        <div>            
+        <div>
+            <Box component='form' onSubmit={handleClientes}>
+                <TextField
+                    label='Informar nome ou parte do nome:'
+                    size='small'
+                    value={nome}
+                    onChange={evento => setNome(evento.target.value)}
+                />
+                <Button type='submit'>Filtrar</Button>
+            </Box>
+            
+            
+
             <TableContainer component={Paper}>
                 <TableHead>
                     <TableRow>
@@ -34,8 +70,12 @@ export default function ListagemCliente() {
                 </TableHead>
                 <TableBody>
                     {clientes && clientes.map((cliente) => (
-                        <TableRow key={cliente.id}>
-                            <TableCell>{cliente.nome}</TableCell>
+                        <TableRow key={cliente.codigo}>
+                            <TableCell>
+                                <Link to={`cliente/${cliente.codigo}`} >
+                                    {cliente.nome}
+                                </Link>
+                            </TableCell>
                             <TableCell>{cliente.cpf}</TableCell>
                             <TableCell>{cliente.cor}</TableCell>
                             <TableCell>{cliente.estadoCivil}</TableCell>

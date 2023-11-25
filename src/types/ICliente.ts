@@ -1,5 +1,5 @@
 export interface ICliente {
-    id: number,
+    codigo?: number,
     nome: string,
     cpf: number,
     cor: string,

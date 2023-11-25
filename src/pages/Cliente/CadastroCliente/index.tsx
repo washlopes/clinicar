@@ -13,14 +13,17 @@ export default function CadastroCliente() {
 
     const parametros = useParams ();
 
+
     useEffect(() => {
 
-        if (parametros.codigo) {
+        if (parametros.codigo !== 'novo') {
             
             api.get<ICliente>(`clientes/${parametros.codigo}`)
                 .then((resposta) => {                
                     setCliente(resposta.data);
                 });
+        } else {
+            setCliente(undefined);
         }
         
     }, [parametros]);
@@ -30,17 +33,11 @@ export default function CadastroCliente() {
     const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();        
 
-        useEffect(() => {
-            if (parametros.codigo) {
-                api.put<ICliente>(`cliente/${cliente}`);
-            } else {
-                api.post<ICliente>(`cliente/${cliente}`);
-            }
-        },[cliente]);      
+            
     };
 
-    return (
-        <form onSubmit={aoSubmeterForm}>
+    return (        
+        <Box component='form' onSubmit={aoSubmeterForm}>
             <div >
                 <TextField 
                     value={cliente && cliente.nome}                    
@@ -221,6 +218,6 @@ export default function CadastroCliente() {
             <div>
                 <Button type='submit' variant='outlined' sx={{margin: 1}}>Cadastrar</Button>
             </div>          
-        </form>
+        </Box>
     );
 }
