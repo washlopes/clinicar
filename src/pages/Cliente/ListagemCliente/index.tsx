@@ -82,7 +82,12 @@ export default function ListagemCliente() {
                             <TableCell>{cliente.sexo}</TableCell>
                             <TableCell>{cliente.pai}</TableCell>
                             <TableCell>{cliente.mae}</TableCell>
-                            <TableCell>{cliente?.dataNascimento?.toString()}</TableCell>                            
+                            <TableCell>{new Date(cliente.dataNascimento).toLocaleDateString('pt-BR', {
+                                timeZone: 'UTC'
+                            })}</TableCell> 
+                            <TableCell>
+                                <Link to={`atendimento/${cliente.codigo}`}><Button variant='outlined' sx={{margin: 1}}>Atendimento</Button> </Link>
+                            </TableCell>                           
                         </TableRow>
                     ))}
                 </TableBody>
