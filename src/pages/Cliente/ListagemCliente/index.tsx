@@ -72,7 +72,7 @@ export default function ListagemCliente() {
                     {clientes && clientes.map((cliente) => (
                         <TableRow key={cliente.codigo}>
                             <TableCell>
-                                <Link to={`cliente/${cliente.codigo}`} >
+                                <Link to={`${cliente.codigo}`} >
                                     {cliente.nome}
                                 </Link>
                             </TableCell>
@@ -82,7 +82,7 @@ export default function ListagemCliente() {
                             <TableCell>{cliente.sexo}</TableCell>
                             <TableCell>{cliente.pai}</TableCell>
                             <TableCell>{cliente.mae}</TableCell>
-                            <TableCell>{cliente?.dataNascimento}</TableCell>                            
+                            <TableCell>{cliente?.dataNascimento?.toString()}</TableCell>                            
                         </TableRow>
                     ))}
                 </TableBody>

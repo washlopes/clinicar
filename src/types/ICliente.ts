@@ -7,7 +7,7 @@ export interface ICliente {
     sexo: string,
     pai: string,
     mae: string,
-    dataNascimento: string,
+    dataNascimento: Date | null,
     profissao: string,
     indicacao: string,
     endereco: string,
