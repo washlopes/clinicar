@@ -5,36 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { ICliente } from 'types/ICliente';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {  useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import api from 'services';
 import Swal from 'sweetalert2';
 import dayjs, { Dayjs } from 'dayjs';
-
-
-// declare interface InitialClienteState {
-//         nome: '',
-//         cpf: 0,
-//         cor: '',
-//         estadoCivil: '',
-//         sexo: '',
-//         dataNascimento: '',        
-//         pai: '',
-//         mae: '',
-//         profissao: '',
-//         indicacao: '',
-//         endereco: '',
-//         numero: 0,
-//         complemento: '',
-//         bairro: '',
-//         municipio: '',
-//         uf: '',
-//         cep: '',
-//         telefoneResidencial: '',
-//         telefoneComercial: '',
-//         telefoneCelular: '',
-//         email: ''
-
-//     }
 
 export default function CadastroCliente() {   
 
@@ -64,6 +38,7 @@ export default function CadastroCliente() {
 
     const parametros = useParams ();
 
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -164,7 +139,7 @@ export default function CadastroCliente() {
                     Swal.fire({
                         icon: 'success',
                         title: 'Cadastro',
-                        text: 'Cliente ' + resposta.data.nome + ' cadastrado com sucesso'
+                        text: 'Cliente ' + resposta.data.nome + ' atualizado com sucesso'
                     });
                 }).catch((error) => {
                     Swal.fire({
@@ -173,10 +148,7 @@ export default function CadastroCliente() {
                         text: error
                     });
                 });
-        }
-        
-        
-            
+        }   
     };
 
     return (        
@@ -410,7 +382,9 @@ export default function CadastroCliente() {
                 />
                 <div>
                     <Button type='submit' variant='outlined' sx={{margin: 1}}>{!cliente.codigo ? 'Cadastrar' : 'Salvar'}</Button>
-                    
+                    <Button onClick={() => {
+                        return navigate(-1);
+                    }} variant='outlined' sx={{margin: 1}}>Voltar</Button>
                 </div>
             </Paper>          
         </Box>
