@@ -15,7 +15,7 @@ export default function AppRouter() {
             <Header />
             <Menu/>
             <Routes>
-                <Route path='/' element={<PaginaPadrao />} >
+                <Route path='/clinicar' element={<PaginaPadrao />} >
                     <Route index element={<Inicio />} />
                     <Route path='clinicar/cliente' element={<ListagemCliente />} />
                     <Route path='clinicar/cliente/:codigo' element={<CadastroCliente/>} />

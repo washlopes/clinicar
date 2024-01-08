@@ -126,6 +126,29 @@ export default function CadastroCliente() {
                         title: 'Cadastro',
                         text: 'Cliente ' + resposta.data.nome + ' cadastrado com sucesso'
                     });
+                    setCliente({
+                        nome: '',
+                        cpf: 0,
+                        cor: '',
+                        estadoCivil: '',
+                        sexo: '',
+                        dataNascimento: new Date(),        
+                        pai: '',
+                        mae: '',
+                        profissao: '',
+                        indicacao: '',
+                        endereco: '',
+                        numero: 0,
+                        complemento: '',
+                        bairro: '',
+                        municipio: '',
+                        uf: '',
+                        cep: '',
+                        telefoneResidencial: '',
+                        telefoneComercial: '',
+                        telefoneCelular: '',
+                        email: ''
+                    });
                 }).catch((error) => {
                     Swal.fire({
                         icon: 'error',

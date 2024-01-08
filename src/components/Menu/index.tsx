@@ -6,7 +6,7 @@ export default function Menu() {
 
     return (
         <>
-            <Link to='cliente/novo'>
+            <Link to='clinicar/cliente/novo'>
                 <Button>
                     Cadastrar Cliente
                 </Button>
